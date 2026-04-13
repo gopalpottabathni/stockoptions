@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NSE Signal Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <p class="eyebrow">Indian Market Intelligence</p>
+        <h1>NSE Signal Deck</h1>
+        <p class="muted">A light-theme stock analysis dashboard for NSE cash, F&amp;O setups, news catalysts, and social sentiment.</p>
+      </div>
+      <div class="status-card">
+        <span class="status-dot"></span>
+        <div>
+          <p class="card-label">Data mode</p>
+          <strong id="dataModeLabel">Demo intelligence stream</strong>
+        </div>
+      </div>
+      <nav class="section-links">
+        <a href="#overview">Overview</a>
+        <a href="#scanner">Stock Scanner</a>
+        <a href="#options">Options Radar</a>
+        <a href="#pulse">News &amp; Social Pulse</a>
+        <a href="#cards">X-ready Cards</a>
+        <a href="#settings">Setup</a>
+      </nav>
+      <div class="risk-box">
+        <p class="card-label">Use notice</p>
+        <p class="muted">This app is for research support. It does not guarantee returns or replace regulated financial advice.</p>
+      </div>
+    </aside>
+    <main class="main-content">
+      <section class="hero-panel" id="overview">
+        <div class="hero-copy">
+          <p class="eyebrow">Fast signal view</p>
+          <h2>Track NIFTY tone, sector rotation, pattern breaks, and event-driven risk in one place.</h2>
+          <p class="hero-text">The engine blends technical structure, timing, fundamentals, derivatives context, news catalysts, and social reactions into a weighted signal score.</p>
+        </div>
+        <div class="hero-actions">
+          <button id="refreshButton" class="primary-button">Refresh analysis</button>
+          <button id="toggleModeButton" class="ghost-button">Switch to live-ready mode</button>
+        </div>
+      </section>
+
+      <section class="metrics-grid" aria-label="Market summary">
+        <article class="metric-card"><p class="card-label">NIFTY bias</p><h3 id="niftyBias">Bullish pullback</h3><p id="niftyBiasReason" class="muted"></p></article>
+        <article class="metric-card"><p class="card-label">Bank Nifty tone</p><h3 id="bankNiftyTone">Neutral to bullish</h3><p id="bankNiftyReason" class="muted"></p></article>
+        <article class="metric-card"><p class="card-label">Market breadth</p><h3 id="breadthValue">64%</h3><p id="breadthReason" class="muted"></p></article>
+        <article class="metric-card"><p class="card-label">Event risk</p><h3 id="eventRiskValue">Elevated</h3><p id="eventRiskReason" class="muted"></p></article>
+      </section>
+
+      <section class="layout-grid">
+        <article class="panel wide-panel">
+          <div class="panel-header">
+            <div><p class="eyebrow">Index path</p><h3>NIFTY time-frame projection</h3></div>
+            <div class="pill-row"><span class="pill">15m</span><span class="pill active">1D</span><span class="pill">1W</span></div>
+          </div>
+          <svg id="indexChart" class="chart" viewBox="0 0 720 260" preserveAspectRatio="none" aria-label="NIFTY projection chart"></svg>
+          <div class="note-grid">
+            <div><p class="card-label">Pattern read</p><p id="patternRead"></p></div>
+            <div><p class="card-label">Volatility call</p><p id="volatilityRead"></p></div>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="panel-header"><div><p class="eyebrow">Today’s shortlist</p><h3>Highest conviction setups</h3></div></div>
+          <div id="topIdeas" class="idea-list"></div>
+        </article>
+      </section>
+
+      <section class="panel" id="scanner">
+        <div class="panel-header">
+          <div><p class="eyebrow">Universe scanner</p><h3>NSE stocks ranked by multi-factor score</h3></div>
+          <div class="filter-row">
+            <label>Bias<select id="biasFilter"><option value="all">All</option><option value="bullish">Bullish</option><option value="bearish">Bearish</option><option value="neutral">Neutral</option></select></label>
+            <label>Sector<select id="sectorFilter"><option value="all">All sectors</option></select></label>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Stock</th><th>Sector</th><th>Signal</th><th>Pattern</th><th>Sentiment</th><th>Buy zone</th><th>Exit zone</th></tr></thead>
+            <tbody id="scannerTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="layout-grid" id="options">
+        <article class="panel">
+          <div class="panel-header"><div><p class="eyebrow">F&amp;O radar</p><h3>Options opportunities</h3></div></div>
+          <div id="optionsIdeas" class="stack-list"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-header"><div><p class="eyebrow">Technical engine</p><h3>Pattern detectors in use</h3></div></div>
+          <ul class="feature-list">
+            <li>Trendline breaks and retests</li>
+            <li>Head and shoulders / inverse H&amp;S</li>
+            <li>Butterfly and extension zones</li>
+            <li>Volume expansion and delivery checks</li>
+            <li>RSI, MACD, moving average alignment</li>
+            <li>Time-window projections for 15m, daily, weekly</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="layout-grid" id="pulse">
+        <article class="panel">
+          <div class="panel-header"><div><p class="eyebrow">Catalyst pulse</p><h3>News, politics, geopolitics, and macro</h3></div></div>
+          <div id="catalystFeed" class="stack-list"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-header"><div><p class="eyebrow">Social reaction</p><h3>Market chatter heatmap</h3></div></div>
+          <div id="socialSummary" class="social-summary"></div>
+          <div id="leaderImpact" class="stack-list compact"></div>
+        </article>
+      </section>
+
+      <section class="panel" id="cards">
+        <div class="panel-header"><div><p class="eyebrow">Publishing mode</p><h3>X-ready stock idea cards</h3></div></div>
+        <div id="xCards" class="x-card-grid"></div>
+      </section>
+
+      <section class="panel" id="settings">
+        <div class="panel-header"><div><p class="eyebrow">Deployment and live data</p><h3>Host this for free and upgrade to live feeds</h3></div></div>
+        <div class="settings-grid">
+          <div class="settings-card"><p class="card-label">Free hosting</p><p>Netlify, Cloudflare Pages, and GitHub Pages can host the frontend. Netlify is convenient if you later add scheduled serverless functions.</p></div>
+          <div class="settings-card"><p class="card-label">Live market data</p><p>Set your own API endpoints for NSE prices, F&amp;O chains, news, and sentiment. This app already has placeholders for integration.</p></div>
+          <div class="settings-card"><p class="card-label">Autonomous runs</p><p>For unattended scanning, use a scheduler plus a backend or serverless function to refresh scores and store results.</p></div>
+        </div>
+        <form id="configForm" class="config-form">
+          <label>Market API endpoint<input id="marketEndpoint" name="marketEndpoint" placeholder="https://your-api.example.com/market"></label>
+          <label>News API endpoint<input id="newsEndpoint" name="newsEndpoint" placeholder="https://your-api.example.com/news"></label>
+          <label>Social API endpoint<input id="socialEndpoint" name="socialEndpoint" placeholder="https://your-api.example.com/social"></label>
+          <button type="submit" class="primary-button">Save endpoints</button>
+        </form>
+        <p id="configStatus" class="muted"></p>
+      </section>
+    </main>
+  </div>
+  <script src="data/demo-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
